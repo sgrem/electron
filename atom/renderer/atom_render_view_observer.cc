@@ -114,8 +114,12 @@ void AtomRenderViewObserver::EmitIPCEvent(blink::WebLocalFrame* frame,
 }
 
 void AtomRenderViewObserver::DraggableRegionsChanged(blink::WebFrame* frame) {
+  if (!frame->IsWebLocalFrame()) {
+    return;
+  }
+
   blink::WebVector<blink::WebDraggableRegion> webregions =
-      frame->GetDocument().DraggableRegions();
+      frame->ToWebLocalFrame()->GetDocument().DraggableRegions();
   std::vector<DraggableRegion> regions;
   for (auto& webregion : webregions) {
     DraggableRegion region;
