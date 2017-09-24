@@ -4,8 +4,8 @@ This document describes the process for releasing a new version of Electron.
 
 ## Create a backport branch
 
-If you're about release a new major or minor version of Electron like `1.8.0`, 
-`1.9.0`, or `2.0.0`, first create a branch from the most recent minor release 
+If you're about release a new major or minor version of Electron like `1.8.0`,
+`1.9.0`, or `2.0.0`, first create a branch from the most recent minor release
 for later backports:
 
 Assuming you're about to publish `1.8.0`, and the highest `1.7` release was
@@ -56,8 +56,9 @@ will [trigger the release process](https://github.com/electron/electron/blob/796
 
 To monitor the build progress, see the following pages:
 
-- [208.52.191.140:8080/view/All/builds](http://208.52.191.140:8080/view/All/builds) for Mac and Windows
-- [jenkins.githubapp.com/label/chromium/](https://jenkins.githubapp.com/label/chromium/) for Linux
+- [208.52.191.140:8080/view/All/builds](http://208.52.191.140:8080/view/All/builds) for Mac
+- [https://circleci.com/gh/electron](https://circleci.com/gh/electron) for Linux
+- [https://windows-ci.electronjs.org/project/AppVeyor/electron] for Windows
 
 ## Compile release notes
 
@@ -136,7 +137,7 @@ This release is published to [npm](https://www.npmjs.com/package/electron) under
 1. Edit the release and add release notes.
 1. Ensure the `prerelease` checkbox is checked. This should happen automatically for Electron versions >=1.7
 1. Click 'Save draft'. **Do not click 'Publish release'!**
-1. Wait for all builds to pass before proceeding. 
+1. Wait for all builds to pass before proceeding.
 
 ## Merge temporary branch
 
@@ -203,7 +204,7 @@ git push origin :release # delete remote branch
 
 ## Promoting a release on npm
 
-New releases are published to npm with the `beta` tag. Every release should 
+New releases are published to npm with the `beta` tag. Every release should
 eventually get promoted to stable unless there's a good reason not to.
 
 Releases are normally given around two weeks in the wild before being promoted.
@@ -230,4 +231,4 @@ Then edit the release on GitGub:
 
 1. Remove `beta` from the release name: electron v1.7.5 ~~beta~~
 1. Uncheck the `prerelease` checkbox.
-1. Click "Update release" 
+1. Click "Update release"
