@@ -1126,22 +1126,8 @@ void NativeWindowViews::OnWidgetBoundsChanged(
   const auto new_bounds = GetBounds();
   if (widget_size_ != new_bounds.size()) {
     if (browser_view_) {
-      const auto flags = static_cast<NativeBrowserViewViews*>(browser_view_)
-                             ->GetAutoResizeFlags();
-      int width_delta = 0;
-      int height_delta = 0;
-      if (flags & kAutoResizeWidth) {
-        width_delta = new_bounds.width() - widget_size_.width();
-      }
-      if (flags & kAutoResizeHeight) {
-        height_delta = new_bounds.height() - widget_size_.height();
-      }
-
-      auto* view = browser_view_->GetInspectableWebContentsView()->GetView();
-      auto new_view_size = view->size();
-      new_view_size.set_width(new_view_size.width() + width_delta);
-      new_view_size.set_height(new_view_size.height() + height_delta);
-      view->SetSize(new_view_size);
+      static_cast<NativeBrowserViewViews*>(browser_view_)->
+          OnParentWidgetBoundsChanged();
     }
 
     NotifyWindowResize();

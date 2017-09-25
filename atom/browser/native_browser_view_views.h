@@ -15,6 +15,9 @@ class NativeBrowserViewViews : public NativeBrowserView {
       brightray::InspectableWebContentsView* web_contents_view);
   ~NativeBrowserViewViews() override;
 
+  void OnParentWidgetBoundsChanged();
+
+  // NativeBrowserView:
   uint8_t GetAutoResizeFlags() { return auto_resize_flags_; }
   void SetAutoResizeFlags(uint8_t flags) override {
     auto_resize_flags_ = flags;

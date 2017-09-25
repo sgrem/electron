@@ -17,6 +17,24 @@ NativeBrowserViewViews::NativeBrowserViewViews(
 
 NativeBrowserViewViews::~NativeBrowserViewViews() {}
 
+void NativeBrowserViewViews::OnParentWidgetBoundsChanged() {
+  const auto flags = GetAutoResizeFlags();
+  int width_delta = 0;
+  int height_delta = 0;
+  if (flags & kAutoResizeWidth) {
+    width_delta = new_bounds.width() - widget_size_.width();
+  }
+  if (flags & kAutoResizeHeight) {
+    height_delta = new_bounds.height() - widget_size_.height();
+  }
+
+  auto* view = GetInspectableWebContentsView()->GetView();
+  auto new_view_size = view->size();
+  new_view_size.set_width(new_view_size.width() + width_delta);
+  new_view_size.set_height(new_view_size.height() + height_delta);
+  view->SetSize(new_view_size);
+}
+
 void NativeBrowserViewViews::SetBounds(const gfx::Rect& bounds) {
   auto* view = GetInspectableWebContentsView()->GetView();
   view->SetBoundsRect(bounds);
